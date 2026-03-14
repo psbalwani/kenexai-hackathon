@@ -1,0 +1,115 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36" version="29.6.1">
+  <diagram name="Page-1" id="MUoULh58ycN2kYEIP8h-">
+    <mxGraphModel dx="1146" dy="630" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="lane_sources" parent="1" style="shape=swimlane;whiteSpace=wrap;html=1;startSize=23;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="DATA SOURCES" vertex="1">
+          <mxGeometry height="120" width="1120" x="20" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="ds1" parent="lane_sources" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;" value="Car_Insurance_Claim.csv&lt;br&gt;(10,000 rows)" vertex="1">
+          <mxGeometry height="60" width="180" x="200" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ds2" parent="lane_sources" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;" value="motor_data14-2018.csv&lt;br&gt;(508,499 rows)" vertex="1">
+          <mxGeometry height="60" width="180" x="700" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_medallion" parent="1" style="shape=swimlane;whiteSpace=wrap;html=1;startSize=23;fillColor=#f5f5f5;strokeColor=#666666;" value="MEDALLION ARCHITECTURE" vertex="1">
+          <mxGeometry height="320" width="1120" x="20" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="bronze1" parent="lane_medallion" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5a76f;" value="bronze_claims" vertex="1">
+          <mxGeometry height="50" width="180" x="200" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="bronze2" parent="lane_medallion" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5a76f;" value="bronze_motor" vertex="1">
+          <mxGeometry height="50" width="180" x="700" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="silver1" parent="lane_medallion" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1e1e1;" value="silver_claims&lt;br&gt;(Cleaned, Typed)" vertex="1">
+          <mxGeometry height="50" width="180" x="200" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="silver2" parent="lane_medallion" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1e1e1;" value="silver_motor&lt;br&gt;(Null Handled, Parsed)" vertex="1">
+          <mxGeometry height="50" width="180" x="700" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="gold1" parent="lane_medallion" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;" value="gold_claims&lt;br&gt;(Risk Features)" vertex="1">
+          <mxGeometry height="60" width="180" x="200" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="gold2" parent="lane_medallion" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;" value="gold_motor&lt;br&gt;(Premium/Policy Features)" vertex="1">
+          <mxGeometry height="60" width="180" x="700" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_warehouse" parent="1" style="shape=swimlane;whiteSpace=wrap;html=1;startSize=23;fillColor=#e1e1e1;strokeColor=#737373;" value="DATA WAREHOUSE" vertex="1">
+          <mxGeometry height="100" width="1120" x="20" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="duckdb" parent="lane_warehouse" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#f5f5f5;" value="DuckDB (insurance.db)&lt;br&gt;Stores all 6 Tables" vertex="1">
+          <mxGeometry height="60" width="200" x="460" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_ml" parent="1" style="shape=swimlane;whiteSpace=wrap;html=1;startSize=23;fillColor=#e1d5e7;strokeColor=#9673a6;" value="ML PIPELINE" vertex="1">
+          <mxGeometry height="380" width="360" x="20" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="ml1" parent="lane_ml" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;" value="XGBoost Classifier" vertex="1">
+          <mxGeometry height="50" width="200" x="80" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ml2" parent="lane_ml" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;" value="SHAP Explainability" vertex="1">
+          <mxGeometry height="50" width="200" x="80" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="ml3" parent="lane_ml" style="shape=note;whiteSpace=wrap;html=1;fillColor=#e1d5e7;" value="Artifacts: claim_model.pkl,&lt;br&gt;shap_explainer.pkl, metrics.json" vertex="1">
+          <mxGeometry height="80" width="200" x="80" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="ml4" parent="lane_ml" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;" value="FastAPI Prediction&lt;br&gt;Endpoint (/predict)" vertex="1">
+          <mxGeometry height="50" width="200" x="80" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_analytics" parent="1" style="shape=swimlane;whiteSpace=wrap;html=1;startSize=23;fillColor=#d5e8d4;strokeColor=#82b366;" value="ANALYTICS PIPELINE" vertex="1">
+          <mxGeometry height="380" width="340" x="400" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="ana1" parent="lane_analytics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" value="Motor Policy Analytics" vertex="1">
+          <mxGeometry height="60" width="200" x="70" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ana2" parent="lane_analytics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" value="KPI Aggregations&lt;br&gt;(Make, Usage, Year)" vertex="1">
+          <mxGeometry height="60" width="200" x="70" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_rag" parent="1" style="shape=swimlane;whiteSpace=wrap;html=1;startSize=23;fillColor=#ffe6cc;strokeColor=#d79b00;" value="RAG PIPELINE" vertex="1">
+          <mxGeometry height="380" width="380" x="760" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="rag1" parent="lane_rag" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" value="Data Chunks&lt;br&gt;(Vehicle/Risk Grouped)" vertex="1">
+          <mxGeometry height="50" width="200" x="90" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="rag2" parent="lane_rag" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" value="Google Embeddings&lt;br&gt;(embedding-001)" vertex="1">
+          <mxGeometry height="50" width="200" x="90" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="rag3" parent="lane_rag" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" value="FAISS Vector Store&lt;br&gt;(genai/vectorstore)" vertex="1">
+          <mxGeometry height="70" width="120" x="130" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="rag4" parent="lane_rag" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" value="Similarity Search&lt;br&gt;(Top 6 Chunks)" vertex="1">
+          <mxGeometry height="50" width="200" x="90" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_dashboard" parent="1" style="shape=swimlane;whiteSpace=wrap;html=1;startSize=23;fillColor=#b0e3e6;strokeColor=#0e8088;" value="STREAMLIT DASHBOARD" vertex="1">
+          <mxGeometry height="180" width="1120" x="20" y="1020" as="geometry" />
+        </mxCell>
+        <mxCell id="db1" parent="lane_dashboard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b0e3e6;" value="Overview&lt;br&gt;(Motor KPIs)" vertex="1">
+          <mxGeometry height="100" width="240" x="30" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="db2" parent="lane_dashboard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b0e3e6;" value="Risk Analytics&lt;br&gt;(SHAP, Heatmap)" vertex="1">
+          <mxGeometry height="100" width="240" x="300" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="db3" parent="lane_dashboard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b0e3e6;" value="ML Prediction&lt;br&gt;(Driver Form → XGBoost)" vertex="1">
+          <mxGeometry height="100" width="240" x="570" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="db4" parent="lane_dashboard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b0e3e6;" value="AI Copilot&lt;br&gt;(RAG + Gemini)" vertex="1">
+          <mxGeometry height="100" width="240" x="840" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_genai" parent="1" style="shape=swimlane;whiteSpace=wrap;html=1;startSize=23;fillColor=#f8cecc;strokeColor=#b85450;" value="GENAI LAYER" vertex="1">
+          <mxGeometry height="120" width="1120" x="20" y="1220" as="geometry" />
+        </mxCell>
+        <mxCell id="gen1" parent="lane_genai" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;" value="LangChain Prompt Template&lt;br&gt;(Strict Rules)" vertex="1">
+          <mxGeometry height="60" width="250" x="200" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="gen2" parent="lane_genai" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;" value="Gemini 3.1 Flash API" vertex="1">
+          <mxGeometry height="60" width="250" x="650" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="ds1" target="bronze1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="ds2" target="bronze2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
